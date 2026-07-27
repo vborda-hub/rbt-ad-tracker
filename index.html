@@ -3,376 +3,419 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RBT Ad Intelligence Dashboard</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<title>Competitor Ad Intelligence Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3348;--text:#e2e8f0;--muted:#8892a4;--accent:#3B82F6;--glow:rgba(59,130,246,.15)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
-.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{font-size:18px;font-weight:700;letter-spacing:-.5px}.logo span{color:var(--accent)}
-.badge{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:20px;margin-left:12px}
-.badge strong{color:var(--text)}
-.hstats{display:flex;gap:20px}
-.hs{text-align:right}.hs-n{font-size:20px;font-weight:700;line-height:1}.hs-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.tabs{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex}
-.tab{padding:12px 20px;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);font-size:13px;font-weight:500;transition:all .15s;user-select:none}
-.tab:hover{color:var(--text)}.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.tbadge{background:var(--surface2);color:var(--muted);font-size:10px;padding:2px 6px;border-radius:10px;margin-left:6px}
-.tab.active .tbadge{background:var(--glow);color:var(--accent)}
-.main{padding:20px 24px;max-width:1600px;margin:0 auto}
-.pane{display:none}.pane.active{display:block}
-/* FILTERS */
-.fbar{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.fbar input,.fbar select{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 10px;font-size:13px;outline:none;transition:border-color .15s}
-.fbar input{width:200px}.fbar input:focus,.fbar select:focus{border-color:var(--accent)}
-.fbar select{cursor:pointer}.fcnt{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap}
-/* PILLS */
-.pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.pill{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;background:var(--surface);border:1px solid var(--border);cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;user-select:none}
-.pill:hover{border-color:#4a5568}.pill.active{border-color:currentColor}
-.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}.pcnt{color:var(--muted);font-size:11px}
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:11px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .15s,transform .1s;cursor:pointer}
-.card:hover{border-color:#4a5568;transform:translateY(-1px)}.card.open{border-color:var(--accent)}
-.ch{padding:11px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border)}
-.micon{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.cid{font-size:10px;color:var(--muted);font-family:monospace}.cdate{font-size:12px;font-weight:600}
-.cb{padding:11px 13px}
-.cbadges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
-.bg{padding:3px 7px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
-.bgo{padding:3px 7px;border-radius:4px;font-size:11px;font-weight:500;border:1px solid currentColor;white-space:nowrap}
-.cstats{display:flex;gap:14px;margin-bottom:8px}
-.csn{font-size:17px;font-weight:700;line-height:1}.csl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
-.cf{padding:7px 13px 9px;display:flex;align-items:center;justify-content:space-between}
-.ehint{font-size:11px;color:var(--muted)}
-.mlink{font-size:11px;color:var(--accent);text-decoration:none;padding:4px 9px;border:1px solid var(--accent);border-radius:4px;transition:background .15s}
-.mlink:hover{background:var(--glow)}
-.cex{display:none;padding:11px 13px;border-top:1px solid var(--border);background:var(--surface2)}
-.card.open .cex{display:block}
-.exlabel{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
-.extxt{font-size:12px;line-height:1.5;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-bottom:7px}
-.transcript{font-size:12px;color:#a3e635;font-style:italic;background:rgba(163,230,53,.06);border:1px solid rgba(163,230,53,.2);border-radius:6px;padding:8px 10px;line-height:1.5}
-.notx{font-size:11px;color:var(--muted);font-style:italic}
-/* LOAD MORE */
-.lmbtn{display:block;margin:18px auto 0;padding:9px 26px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);cursor:pointer;font-size:13px;transition:all .15s}
-.lmbtn:hover{border-color:var(--accent);color:var(--accent)}
-/* TIMELINE */
-.tl-layout{display:grid;grid-template-columns:1fr 290px;gap:14px}
-@media(max-width:900px){.tl-layout{grid-template-columns:1fr}}
-.cc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px}
-.cchead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.cctitle{font-size:15px;font-weight:600}
-.ctoggle{display:flex;gap:4px}
-.ctbtn{padding:4px 11px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:11px;transition:all .15s}
-.ctbtn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.cw{position:relative;height:300px}
-.legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}
-.li{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)}
-.ldot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-.pncard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
-.pntitle{font-size:13px;font-weight:700;margin-bottom:3px}.pnsub{font-size:11px;color:var(--muted);margin-bottom:12px}
-.pitem{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)}
-.pitem:last-child{border-bottom:none}
-.pbwrap{flex:1}.pcat{font-size:11px;font-weight:600;margin-bottom:3px}
-.pbbg{background:var(--surface2);border-radius:3px;height:6px;overflow:hidden}
-.pb{height:6px;border-radius:3px;transition:width .5s}
-.pcnt2{font-size:12px;font-weight:700;min-width:26px;text-align:right}
-.sec-title{font-size:13px;font-weight:700;margin:16px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
-.newbadge{background:#10B981;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.5px}
-/* DEACTIVATED */
-.empty{text-align:center;padding:70px 20px;color:var(--muted)}
-.eicon{font-size:44px;margin-bottom:14px;opacity:.5}.etitle{font-size:16px;font-weight:600;color:var(--text);margin-bottom:7px}
-.edesc{font-size:13px;line-height:1.6;max-width:400px;margin:0 auto}
-/* LOADING */
-.loading{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px}
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e2e8f0;
+    --muted: #8892a4;
+    --accent: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+
+  /* ── Top header ── */
+  .header { padding: 20px 28px 0; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; color: #fff; }
+  .header p { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── Company outer tabs ── */
+  .company-tabs { display: flex; gap: 4px; margin-top: 18px; }
+  .company-tab {
+    padding: 9px 20px; border-radius: 8px 8px 0 0; cursor: pointer;
+    font-size: .85rem; font-weight: 600; color: var(--muted);
+    border: 1px solid transparent; border-bottom: none;
+    transition: color .15s, background .15s;
+  }
+  .company-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  .company-tab.active { color: #fff; background: var(--surface); border-color: var(--border); }
+
+  /* ── Company panel ── */
+  .company-panel { display: none; padding: 20px 28px 40px; }
+  .company-panel.active { display: block; }
+
+  /* ── Stats row ── */
+  .stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; min-width: 130px; }
+  .stat-card .val { font-size: 1.6rem; font-weight: 700; color: #fff; }
+  .stat-card .lbl { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+
+  /* ── Inner tabs ── */
+  .inner-tabs { display: flex; gap: 6px; margin-bottom: 18px; }
+  .inner-tab {
+    padding: 6px 16px; border-radius: 6px; cursor: pointer;
+    font-size: .82rem; font-weight: 500; color: var(--muted);
+    border: 1px solid var(--border); background: transparent;
+    transition: color .15s, background .15s;
+  }
+  .inner-tab:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  .inner-tab.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+
+  /* ── Inner sections ── */
+  .inner-section { display: none; }
+  .inner-section.active { display: block; }
+
+  /* ── Filter bar ── */
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+  .filter-bar span { font-size: .78rem; color: var(--muted); }
+  .filter-pill {
+    padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: .76rem; font-weight: 500;
+    border: 1px solid var(--border); background: transparent; color: var(--muted);
+    transition: all .15s;
+  }
+  .filter-pill.active { color: #fff; border-color: transparent; }
+  .filter-pill:hover { opacity: .85; }
+
+  /* ── Search box ── */
+  .search-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 7px 14px; color: var(--text); font-size: .82rem; width: 220px;
+    outline: none;
+  }
+  .search-box::placeholder { color: var(--muted); }
+  .search-box:focus { border-color: var(--accent); }
+
+  /* ── Ad grid ── */
+  .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+  .ad-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; transition: border-color .15s;
+  }
+  .ad-card:hover { border-color: #3a3d4e; }
+  .ad-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .ad-card-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .cat-pill {
+    display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: .7rem; font-weight: 600;
+    color: #fff; white-space: nowrap;
+  }
+  .media-badge {
+    display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 12px;
+    font-size: .7rem; font-weight: 500; border: 1px solid var(--border); color: var(--muted); white-space: nowrap;
+  }
+  .ad-copy { font-size: .82rem; color: var(--text); line-height: 1.5; margin-bottom: 10px; }
+  .ad-creative { font-size: .76rem; color: var(--muted); font-style: italic; margin-bottom: 10px; border-left: 2px solid var(--border); padding-left: 8px; }
+  .ad-meta { display: flex; gap: 12px; font-size: .72rem; color: var(--muted); }
+  .ad-meta strong { color: var(--text); }
+
+  /* ── Chart section ── */
+  .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .chart-title { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 260px; }
+
+  /* ── Category breakdown ── */
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 16px; }
+  .cat-row { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
+  .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .cat-name { font-size: .8rem; color: var(--text); flex: 1; }
+  .cat-count { font-size: .8rem; font-weight: 700; color: var(--text); }
+  .cat-pct { font-size: .72rem; color: var(--muted); }
+
+  /* ── Empty state ── */
+  .empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: .9rem; }
+  .loading { text-align: center; padding: 60px 20px; color: var(--muted); font-size: .9rem; }
 </style>
 </head>
 <body>
+
 <div class="header">
-  <div style="display:flex;align-items:center">
-    <div class="logo">RBT <span>Ad Intel</span></div>
-    <div class="badge">Meta Ad Library · Scraped <strong id="scraped-date">—</strong></div>
-  </div>
-  <div class="hstats">
-    <div class="hs"><div class="hs-n" id="h-total">—</div><div class="hs-l">Active Ads</div></div>
-    <div class="hs"><div class="hs-n" id="h-video">—</div><div class="hs-l">Video</div></div>
-    <div class="hs"><div class="hs-n" id="h-image">—</div><div class="hs-l">Image</div></div>
-    <div class="hs"><div class="hs-n">0</div><div class="hs-l">Deactivated</div></div>
+  <h1>Competitor Ad Intelligence</h1>
+  <p id="last-updated">Loading...</p>
+  <div class="company-tabs">
+    <div class="company-tab active" data-company="arena-club" onclick="switchCompany('arena-club')">🏟️ Arena Club</div>
+    <div class="company-tab" data-company="rbt" onclick="switchCompany('rbt')">🎴 Rips by Triumph</div>
+    <div class="company-tab" data-company="courtyard" onclick="switchCompany('courtyard')">🏪 Courtyard</div>
   </div>
 </div>
 
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('ads',this)">Active Ads <span class="tbadge" id="tb-ads">—</span></div>
-  <div class="tab" onclick="switchTab('timeline',this)">Timeline &amp; Strategy</div>
-  <div class="tab" onclick="switchTab('deactivated',this)">Deactivated <span class="tbadge">0</span></div>
+<!-- ─────────────── ARENA CLUB PANEL ─────────────── -->
+<div class="company-panel active" id="panel-arena-club">
+  <div class="loading" id="loading-arena-club">Loading Arena Club data…</div>
+  <div id="content-arena-club" style="display:none">
+    <div class="stats-row" id="stats-arena-club"></div>
+    <div class="inner-tabs">
+      <div class="inner-tab active" onclick="switchInner('arena-club','active')">Active Ads</div>
+      <div class="inner-tab" onclick="switchInner('arena-club','timeline')">Timeline & Strategy</div>
+      <div class="inner-tab" onclick="switchInner('arena-club','deactivated')">Deactivated</div>
+    </div>
+    <div class="inner-section active" id="inner-arena-club-active">
+      <div class="filter-bar"><span>Filter:</span><div id="filters-arena-club" style="display:contents"></div><input class="search-box" placeholder="Search copy…" oninput="filterAds('arena-club', this.value)"></div>
+      <div class="ads-grid" id="grid-arena-club"></div>
+    </div>
+    <div class="inner-section" id="inner-arena-club-timeline">
+      <div class="chart-container"><div class="chart-title">Ad Volume by Month</div><div class="chart-wrap"><canvas id="chart-bar-arena-club"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Cumulative Active Ads</div><div class="chart-wrap"><canvas id="chart-line-arena-club"></canvas></div></div>
+      <div id="cat-breakdown-arena-club"></div>
+    </div>
+    <div class="inner-section" id="inner-arena-club-deactivated">
+      <div class="ads-grid" id="grid-deact-arena-club"></div>
+    </div>
+  </div>
 </div>
 
-<div class="main">
-  <div class="pane active" id="pane-ads">
-    <div class="loading" id="loading-msg">Loading ad data…</div>
-    <div id="ads-content" style="display:none">
-      <div class="fbar">
-        <input type="text" id="search" placeholder="Search copy, ID…" oninput="applyFilters()">
-        <select id="f-cat" onchange="applyFilters()"><option value="">All Categories</option></select>
-        <select id="f-media" onchange="applyFilters()"><option value="">All Media</option><option>Video</option><option>Image</option></select>
-        <select id="f-goal" onchange="applyFilters()"><option value="">All Goals</option></select>
-        <select id="f-sort" onchange="applyFilters()">
-          <option value="date-desc">Newest First</option>
-          <option value="date-asc">Oldest First</option>
-          <option value="vars-desc">Most Variations</option>
-          <option value="days-desc">Longest Running</option>
-        </select>
-        <div class="fcnt" id="fcnt"></div>
-      </div>
-      <div class="pills" id="pills"></div>
-      <div class="grid" id="grid"></div>
-      <button class="lmbtn" id="lmbtn" onclick="loadMore()" style="display:none">Load More Ads</button>
+<!-- ─────────────── RBT PANEL ─────────────── -->
+<div class="company-panel" id="panel-rbt">
+  <div class="loading" id="loading-rbt">Loading RBT data…</div>
+  <div id="content-rbt" style="display:none">
+    <div class="stats-row" id="stats-rbt"></div>
+    <div class="inner-tabs">
+      <div class="inner-tab active" onclick="switchInner('rbt','active')">Active Ads</div>
+      <div class="inner-tab" onclick="switchInner('rbt','timeline')">Timeline & Strategy</div>
+      <div class="inner-tab" onclick="switchInner('rbt','deactivated')">Deactivated</div>
+    </div>
+    <div class="inner-section active" id="inner-rbt-active">
+      <div class="filter-bar"><span>Filter:</span><div id="filters-rbt" style="display:contents"></div><input class="search-box" placeholder="Search copy…" oninput="filterAds('rbt', this.value)"></div>
+      <div class="ads-grid" id="grid-rbt"></div>
+    </div>
+    <div class="inner-section" id="inner-rbt-timeline">
+      <div class="chart-container"><div class="chart-title">Ad Volume by Month</div><div class="chart-wrap"><canvas id="chart-bar-rbt"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Cumulative Active Ads</div><div class="chart-wrap"><canvas id="chart-line-rbt"></canvas></div></div>
+      <div id="cat-breakdown-rbt"></div>
+    </div>
+    <div class="inner-section" id="inner-rbt-deactivated">
+      <div class="ads-grid" id="grid-deact-rbt"></div>
     </div>
   </div>
+</div>
 
-  <div class="pane" id="pane-timeline">
-    <div class="tl-layout">
-      <div>
-        <div class="cc">
-          <div class="cchead">
-            <div class="cctitle">Creative Category Mix — Launch Timeline</div>
-            <div class="ctoggle">
-              <button class="ctbtn active" onclick="switchChart('bar',this)">Daily</button>
-              <button class="ctbtn" onclick="switchChart('line',this)">Cumulative</button>
-            </div>
-          </div>
-          <div class="cw"><canvas id="tlChart"></canvas></div>
-          <div class="legend" id="legend"></div>
-        </div>
-        <div class="sec-title">Recently Launched (Last 14 Days) <span class="newbadge">NEW</span></div>
-        <div class="grid" id="recent-grid"></div>
-      </div>
-      <div>
-        <div class="pncard">
-          <div class="pntitle">What RBT Is Pushing Now</div>
-          <div class="pnsub" id="pn-sub">Category mix — last 14 days</div>
-          <div id="pn-bars"></div>
-        </div>
-      </div>
+<!-- ─────────────── COURTYARD PANEL ─────────────── -->
+<div class="company-panel" id="panel-courtyard">
+  <div class="loading" id="loading-courtyard">Loading Courtyard data…</div>
+  <div id="content-courtyard" style="display:none">
+    <div class="stats-row" id="stats-courtyard"></div>
+    <div class="inner-tabs">
+      <div class="inner-tab active" onclick="switchInner('courtyard','active')">Active Ads</div>
+      <div class="inner-tab" onclick="switchInner('courtyard','timeline')">Timeline & Strategy</div>
+      <div class="inner-tab" onclick="switchInner('courtyard','deactivated')">Deactivated</div>
     </div>
-  </div>
-
-  <div class="pane" id="pane-deactivated">
-    <div class="empty">
-      <div class="eicon">📦</div>
-      <div class="etitle">No Deactivated Ads Yet</div>
-      <div class="edesc">All ads are currently active. When ads get deactivated (detected on bi-monthly re-scrape), they'll appear here with their last-seen date.</div>
+    <div class="inner-section active" id="inner-courtyard-active">
+      <div class="filter-bar"><span>Filter:</span><div id="filters-courtyard" style="display:contents"></div><input class="search-box" placeholder="Search copy…" oninput="filterAds('courtyard', this.value)"></div>
+      <div class="ads-grid" id="grid-courtyard"></div>
+    </div>
+    <div class="inner-section" id="inner-courtyard-timeline">
+      <div class="chart-container"><div class="chart-title">Ad Volume by Month</div><div class="chart-wrap"><canvas id="chart-bar-courtyard"></canvas></div></div>
+      <div class="chart-container"><div class="chart-title">Cumulative Active Ads</div><div class="chart-wrap"><canvas id="chart-line-courtyard"></canvas></div></div>
+      <div id="cat-breakdown-courtyard"></div>
+    </div>
+    <div class="inner-section" id="inner-courtyard-deactivated">
+      <div class="ads-grid" id="grid-deact-courtyard"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ── State ──────────────────────────────────────────────────
-let ADS=[], CAT_COLORS={}, GOAL_COLORS={}, CHART={};
-let filtered=[], displayCount=48, activeChart=null, chartType='bar', activeCat='';
+const COMPANIES = {
+  'arena-club': { file: 'data/arena-club.json', label: 'Arena Club' },
+  'rbt':        { file: 'data/rbt.json',         label: 'Rips by Triumph' },
+  'courtyard':  { file: 'data/courtyard.json',   label: 'Courtyard' }
+};
 
-// ── Boot ───────────────────────────────────────────────────
-(async()=>{
-  try{
-    const r=await fetch('./data.json');
-    const d=await r.json();
-    ADS=d.ads; CAT_COLORS=d.catColors; GOAL_COLORS=d.goalColors; CHART=d.chart;
-    document.getElementById('scraped-date').textContent=d.scraped;
-    document.getElementById('loading-msg').style.display='none';
-    document.getElementById('ads-content').style.display='block';
-    const v=ADS.filter(a=>a.mediaType==='Video').length;
-    const im=ADS.filter(a=>a.mediaType==='Image').length;
-    document.getElementById('h-total').textContent=ADS.length;
-    document.getElementById('h-video').textContent=v;
-    document.getElementById('h-image').textContent=im;
-    document.getElementById('tb-ads').textContent=ADS.length;
-    populateFilters();
-    initPills();
-    applyFilters();
-  }catch(e){
-    document.getElementById('loading-msg').textContent='Failed to load data: '+e.message;
+const state = {};   // { [company]: { data, activeFilter, searchQuery, charts } }
+let currentCompany = 'arena-club';
+
+// ── Company switching ──────────────────────────────
+function switchCompany(company) {
+  document.querySelectorAll('.company-tab').forEach(t => t.classList.toggle('active', t.dataset.company === company));
+  document.querySelectorAll('.company-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + company));
+  currentCompany = company;
+  if (!state[company]) loadCompany(company);
+}
+
+// ── Inner tab switching ────────────────────────────
+function switchInner(company, section) {
+  const panel = document.getElementById('panel-' + company);
+  panel.querySelectorAll('.inner-tab').forEach((t, i) => {
+    const sections = ['active','timeline','deactivated'];
+    t.classList.toggle('active', sections[i] === section);
+  });
+  panel.querySelectorAll('.inner-section').forEach(s => {
+    s.classList.toggle('active', s.id === 'inner-' + company + '-' + section);
+  });
+}
+
+// ── Load company data ──────────────────────────────
+async function loadCompany(company) {
+  if (state[company]) return;
+  state[company] = { data: null, activeFilter: 'all', searchQuery: '', charts: {} };
+  try {
+    const r = await fetch(COMPANIES[company].file + '?t=' + Date.now());
+    const data = await r.json();
+    state[company].data = data;
+    renderCompany(company, data);
+    document.getElementById('loading-' + company).style.display = 'none';
+    document.getElementById('content-' + company).style.display = 'block';
+    // Update header timestamp
+    document.getElementById('last-updated').textContent = 'Last scraped: ' + data.scraped;
+  } catch(e) {
+    document.getElementById('loading-' + company).textContent = 'Failed to load data.';
+    console.error(e);
   }
-})();
-
-// ── Tabs ───────────────────────────────────────────────────
-function switchTab(name,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('pane-'+name).classList.add('active');
-  if(name==='timeline') initTimeline();
 }
 
-// ── Filters ────────────────────────────────────────────────
-function populateFilters(){
-  const cats=[...new Set(ADS.map(a=>a.creativeCategory).filter(Boolean))].sort();
-  const goals=[...new Set(ADS.map(a=>a.mainGoal).filter(Boolean))].sort();
-  const csel=document.getElementById('f-cat');
-  cats.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;csel.appendChild(o);});
-  const gsel=document.getElementById('f-goal');
-  goals.forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=g;gsel.appendChild(o);});
+// ── Render everything for a company ───────────────
+function renderCompany(company, data) {
+  renderStats(company, data);
+  renderFilters(company, data);
+  renderGrid(company, data);
+  renderDeactivated(company, data);
+  renderCharts(company, data);
+  renderCatBreakdown(company, data);
 }
 
-function initPills(){
-  const container=document.getElementById('pills');
-  const counts={};
-  ADS.forEach(a=>{counts[a.creativeCategory]=(counts[a.creativeCategory]||0)+1;});
-  const entries=[['All',null,ADS.length],...Object.entries(CAT_COLORS).filter(([c])=>counts[c]).map(([c,col])=>[c,col,counts[c]])];
-  entries.forEach(([name,color,count])=>{
-    const p=document.createElement('div');
-    p.className='pill'+(name==='All'?' active':'');
-    if(color) p.style.color=color;
-    p.innerHTML=color?`<span class="dot" style="background:${color}"></span>${name} <span class="pcnt">${count}</span>`:`${name} <span class="pcnt">${count}</span>`;
-    p.onclick=()=>{
-      activeCat=name==='All'?'':name;
-      document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
-      p.classList.add('active');
-      document.getElementById('f-cat').value=activeCat;
-      applyFilters();
-    };
-    container.appendChild(p);
+// ── Stats ──────────────────────────────────────────
+function renderStats(company, data) {
+  const ads = data.ads || [];
+  const cats = [...new Set(ads.map(a => a.creativeCategory))].length;
+  const videos = ads.filter(a => a.mediaType === 'Video').length;
+  const avgDays = ads.length ? Math.round(ads.reduce((s,a) => s + (a.daysActive||0), 0) / ads.length) : 0;
+  document.getElementById('stats-' + company).innerHTML = `
+    <div class="stat-card"><div class="val">${ads.length}</div><div class="lbl">Active Ads</div></div>
+    <div class="stat-card"><div class="val">${videos}</div><div class="lbl">Video Ads</div></div>
+    <div class="stat-card"><div class="val">${ads.length - videos}</div><div class="lbl">Image Ads</div></div>
+    <div class="stat-card"><div class="val">${cats}</div><div class="lbl">Categories</div></div>
+    <div class="stat-card"><div class="val">${avgDays}d</div><div class="lbl">Avg Days Active</div></div>
+    <div class="stat-card"><div class="val">${(data.deactivated||[]).length}</div><div class="lbl">Deactivated</div></div>
+  `;
+}
+
+// ── Filter pills ───────────────────────────────────
+function renderFilters(company, data) {
+  const ads = data.ads || [];
+  const cats = ['all', ...new Set(ads.map(a => a.creativeCategory))];
+  const colors = data.catColors || {};
+  const container = document.getElementById('filters-' + company);
+  container.innerHTML = cats.map(cat => {
+    const color = cat === 'all' ? '#6b7280' : (colors[cat] || '#6b7280');
+    const isActive = cat === 'all';
+    return `<div class="filter-pill${isActive?' active':''}" style="${isActive?'background:'+color+';border-color:'+color+';color:#fff':''}"
+      data-cat="${cat}" data-company="${company}"
+      onclick="setFilter('${company}','${cat}')"
+      onmouseover="this.style.opacity='.8'"
+      onmouseout="this.style.opacity='1'">
+      ${cat === 'all' ? 'All' : cat}
+    </div>`;
+  }).join('');
+}
+
+function setFilter(company, cat) {
+  state[company].activeFilter = cat;
+  const colors = state[company].data.catColors || {};
+  document.querySelectorAll(`[data-company="${company}"].filter-pill`).forEach(pill => {
+    const c = pill.dataset.cat;
+    const isActive = c === cat;
+    const color = c === 'all' ? '#6b7280' : (colors[c] || '#6b7280');
+    pill.classList.toggle('active', isActive);
+    pill.style.background = isActive ? color : '';
+    pill.style.borderColor = isActive ? color : '';
+    pill.style.color = isActive ? '#fff' : '';
   });
+  renderGrid(company, state[company].data);
 }
 
-function applyFilters(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const cat=document.getElementById('f-cat').value;
-  const media=document.getElementById('f-media').value;
-  const goal=document.getElementById('f-goal').value;
-  const sort=document.getElementById('f-sort').value;
-  if(cat!==activeCat){
-    activeCat=cat;
-    document.querySelectorAll('.pill').forEach(p=>{
-      const txt=p.textContent.replace(/\d+/,'').trim();
-      p.classList.toggle('active',cat===''?txt==='All':txt.startsWith(cat));
-    });
-  }
-  filtered=ADS.filter(a=>{
-    if(cat&&a.creativeCategory!==cat)return false;
-    if(media&&a.mediaType!==media)return false;
-    if(goal&&a.mainGoal!==goal)return false;
-    if(q&&!((a.copy||'')+(a.id||'')+(a.creativeCategory||'')+(a.transcript||'')).toLowerCase().includes(q))return false;
-    return true;
-  });
-  const ms=s=>new Date(s||0).getTime();
-  filtered.sort((a,b)=>{
-    if(sort==='date-desc')return ms(b.started)-ms(a.started);
-    if(sort==='date-asc')return ms(a.started)-ms(b.started);
-    if(sort==='vars-desc')return(b.variations||0)-(a.variations||0);
-    if(sort==='days-desc')return(b.daysActive||0)-(a.daysActive||0);
-    return 0;
-  });
-  displayCount=48;
-  document.getElementById('fcnt').textContent=`${filtered.length} ads`;
-  document.getElementById('tb-ads').textContent=filtered.length;
-  renderGrid();
+function filterAds(company, query) {
+  state[company].searchQuery = query.toLowerCase();
+  renderGrid(company, state[company].data);
 }
 
-// ── Cards ──────────────────────────────────────────────────
-function renderGrid(){
-  const grid=document.getElementById('grid');
-  grid.innerHTML=filtered.slice(0,displayCount).map(card).join('');
-  document.getElementById('lmbtn').style.display=filtered.length>displayCount?'block':'none';
+// ── Ad grid ────────────────────────────────────────
+function renderGrid(company, data) {
+  const { activeFilter, searchQuery } = state[company];
+  let ads = data.ads || [];
+  if (activeFilter !== 'all') ads = ads.filter(a => a.creativeCategory === activeFilter);
+  if (searchQuery) ads = ads.filter(a => (a.copy||'').toLowerCase().includes(searchQuery) || (a.creative||'').toLowerCase().includes(searchQuery));
+  document.getElementById('grid-' + company).innerHTML = ads.length ? ads.map(a => adCard(a, data)).join('') : '<div class="empty">No ads match your filters.</div>';
 }
-function loadMore(){displayCount+=48;renderGrid();}
 
-function card(ad){
-  const cc=CAT_COLORS[ad.creativeCategory]||'#9CA3AF';
-  const gc=GOAL_COLORS[ad.mainGoal]||'#9CA3AF';
-  const isVid=ad.mediaType==='Video';
-  const mb=isVid?'rgba(59,130,246,.15)':'rgba(139,92,246,.15)';
-  const copy=(ad.copy||'').replace(' Low impression count','').trim();
-  const dur=ad.duration?`· ${ad.duration}`:'';
-  const link=`https://www.facebook.com/ads/library/?id=${ad.id}`;
-  return`<div class="card" id="c${ad.id}" onclick="tog('${ad.id}')">
-    <div class="ch">
-      <div class="micon" style="background:${mb}">${isVid?'🎬':'🖼️'}</div>
-      <div>
-        <div class="cid">${ad.id}${dur}</div>
-        <div class="cdate">${ad.started}</div>
+function renderDeactivated(company, data) {
+  const ads = data.deactivated || [];
+  document.getElementById('grid-deact-' + company).innerHTML = ads.length ? ads.map(a => adCard(a, data, true)).join('') : '<div class="empty">No deactivated ads on record.</div>';
+}
+
+function adCard(ad, data, deact = false) {
+  const color = (data.catColors || {})[ad.creativeCategory] || '#6b7280';
+  const mediaIcon = ad.mediaType === 'Video' ? '▶' : '🖼';
+  const durationStr = ad.duration ? ` ${ad.duration}` : '';
+  const deactStyle = deact ? 'opacity:.65;' : '';
+  return `<div class="ad-card" style="${deactStyle}">
+    <div class="ad-card-header">
+      <div class="ad-card-pills">
+        <span class="cat-pill" style="background:${color}">${ad.creativeCategory}</span>
       </div>
+      <span class="media-badge">${mediaIcon}${durationStr} ${ad.mediaType}</span>
     </div>
-    <div class="cb">
-      <div class="cbadges">
-        <span class="bg" style="background:${cc}">${ad.creativeCategory}</span>
-        <span class="bgo" style="color:${gc}">${ad.mainGoal}</span>
-        ${ad.transcript?'<span class="bg" style="background:#65a30d">Transcribed ✓</span>':''}
-      </div>
-      <div class="cstats">
-        <div><div class="csn">${ad.daysActive}</div><div class="csl">Days Active</div></div>
-        <div><div class="csn">${ad.variations||1}</div><div class="csl">Variations</div></div>
-        <div><div class="csn">${ad.mediaType}</div><div class="csl">Format</div></div>
-      </div>
-    </div>
-    <div class="cf">
-      <div class="ehint">Click to expand ↓</div>
-      <a class="mlink" href="${link}" target="_blank" onclick="event.stopPropagation()">View on Meta →</a>
-    </div>
-    <div class="cex">
-      <div class="exlabel">Copy Text</div>
-      <div class="extxt">${copy||'<em style="color:#666">Hidden (low impression)</em>'}</div>
-      ${ad.transcript?`<div class="exlabel">Transcript</div><div class="transcript">"${ad.transcript}"</div>`:`<div class="notx">📹 Transcript pending</div>`}
+    <div class="ad-copy">${(ad.copy||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    <div class="ad-creative">${(ad.creative||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    <div class="ad-meta">
+      <span>🗓 <strong>${ad.started||'?'}</strong></span>
+      <span>⏱ <strong>${ad.daysActive||0}d</strong></span>
+      ${ad.variations > 1 ? `<span>🔀 <strong>${ad.variations} variants</strong></span>` : ''}
+      <span>🎯 ${ad.mainGoal||''}</span>
     </div>
   </div>`;
 }
-function tog(id){document.getElementById('c'+id).classList.toggle('open');}
 
-// ── Timeline ───────────────────────────────────────────────
-function initTimeline(){
-  renderPushBars();
-  renderRecentGrid();
-  if(!activeChart) buildChart(chartType);
-}
+// ── Charts ─────────────────────────────────────────
+function renderCharts(company, data) {
+  const chart = data.chart || {};
 
-function renderPushBars(){
-  const recent=ADS.filter(a=>(a.daysActive||999)<=14);
-  document.getElementById('pn-sub').textContent=`Category mix — last 14 days (${recent.length} ads)`;
-  const counts={};
-  recent.forEach(a=>{counts[a.creativeCategory]=(counts[a.creativeCategory]||0)+1;});
-  const max=Math.max(...Object.values(counts),1);
-  document.getElementById('pn-bars').innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([cat,n])=>`
-    <div class="pitem">
-      <div class="pbwrap">
-        <div class="pcat">${cat}</div>
-        <div class="pbbg"><div class="pb" style="width:${Math.round(n/max*100)}%;background:${CAT_COLORS[cat]||'#9CA3AF'}"></div></div>
-      </div>
-      <div class="pcnt2">${n}</div>
-    </div>`).join('');
-}
-
-function renderRecentGrid(){
-  const recent=ADS.filter(a=>(a.daysActive||999)<=14)
-    .sort((a,b)=>new Date(b.started)-new Date(a.started)).slice(0,12);
-  document.getElementById('recent-grid').innerHTML=recent.map(card).join('');
-}
-
-function buildChart(type){
-  const ctx=document.getElementById('tlChart').getContext('2d');
-  if(activeChart) activeChart.destroy();
-  const ds=type==='bar'?CHART.datasets:CHART.cumulativeDatasets;
-  activeChart=new Chart(ctx,{
-    type:type==='bar'?'bar':'line',
-    data:{labels:CHART.labels,datasets:ds},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,backgroundColor:'#1a1d27',borderColor:'#2e3348',borderWidth:1,titleColor:'#e2e8f0',bodyColor:'#8892a4',callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y}`}}},
-      scales:{
-        x:{stacked:type==='bar',ticks:{color:'#8892a4',maxRotation:45,font:{size:10}},grid:{color:'#2e3348'}},
-        y:{stacked:type==='bar',ticks:{color:'#8892a4',font:{size:10}},grid:{color:'#2e3348'},beginAtZero:true}
+  // Stacked bar
+  const barCtx = document.getElementById('chart-bar-' + company);
+  if (state[company].charts.bar) state[company].charts.bar.destroy();
+  state[company].charts.bar = new Chart(barCtx, {
+    type: 'bar',
+    data: { labels: chart.labels || [], datasets: (chart.datasets || []).map(ds => ({...ds, borderRadius: 3, borderSkipped: false})) },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8892a4', font: { size: 11 } } } },
+      scales: {
+        x: { stacked: true, ticks: { color: '#8892a4' }, grid: { color: '#2a2d3a' } },
+        y: { stacked: true, ticks: { color: '#8892a4' }, grid: { color: '#2a2d3a' } }
       }
     }
   });
-  document.getElementById('legend').innerHTML=ds.map(d=>`<div class="li"><div class="ldot" style="background:${d.backgroundColor||d.borderColor}"></div>${d.label}</div>`).join('');
+
+  // Cumulative line
+  const lineCtx = document.getElementById('chart-line-' + company);
+  if (state[company].charts.line) state[company].charts.line.destroy();
+  state[company].charts.line = new Chart(lineCtx, {
+    type: 'line',
+    data: { labels: chart.labels || [], datasets: (chart.cumulativeDatasets || []).map(ds => ({...ds, tension: 0.35, pointRadius: 4})) },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8892a4', font: { size: 11 } } } },
+      scales: {
+        x: { ticks: { color: '#8892a4' }, grid: { color: '#2a2d3a' } },
+        y: { ticks: { color: '#8892a4' }, grid: { color: '#2a2d3a' } }
+      }
+    }
+  });
 }
 
-function switchChart(type,btn){
-  chartType=type;
-  document.querySelectorAll('.ctbtn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  buildChart(type);
+// ── Category breakdown table ───────────────────────
+function renderCatBreakdown(company, data) {
+  const ads = data.ads || [];
+  const colors = data.catColors || {};
+  const counts = {};
+  ads.forEach(a => { counts[a.creativeCategory] = (counts[a.creativeCategory]||0) + 1; });
+  const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1]);
+  const total = ads.length || 1;
+  document.getElementById('cat-breakdown-' + company).innerHTML = `
+    <div class="chart-title" style="margin-bottom:10px">Category Breakdown</div>
+    <div class="cat-grid">
+      ${sorted.map(([cat, n]) => `
+        <div class="cat-row">
+          <div class="cat-dot" style="background:${colors[cat]||'#6b7280'}"></div>
+          <div class="cat-name">${cat}</div>
+          <div class="cat-count">${n}</div>
+          <div class="cat-pct">${Math.round(n/total*100)}%</div>
+        </div>`).join('')}
+    </div>`;
 }
+
+// ── Init: load first company ───────────────────────
+loadCompany('arena-club');
 </script>
 </body>
 </html>
