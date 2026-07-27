@@ -82,9 +82,16 @@
   .ads-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
   .ad-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px; transition: border-color .15s;
+    padding: 16px; transition: border-color .15s, box-shadow .15s;
+    display: block; text-decoration: none; color: inherit; cursor: pointer;
   }
-  .ad-card:hover { border-color: #3a3d4e; }
+  .ad-card:hover { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .ad-transcript {
+    margin-top: 10px; padding: 8px 10px; background: rgba(59,130,246,.07);
+    border-left: 2px solid var(--accent); border-radius: 0 6px 6px 0;
+    font-size: .75rem; color: var(--muted); line-height: 1.4; font-style: italic;
+  }
+  .ad-transcript strong { color: #7aa4f0; font-style: normal; }
   .ad-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
   .ad-card-pills { display: flex; gap: 6px; flex-wrap: wrap; }
   .cat-pill {
@@ -338,7 +345,11 @@ function adCard(ad, data, deact = false) {
   const mediaIcon = ad.mediaType === 'Video' ? '▶' : '🖼';
   const durationStr = ad.duration ? ` ${ad.duration}` : '';
   const deactStyle = deact ? 'opacity:.65;' : '';
-  return `<div class="ad-card" style="${deactStyle}">
+  const adUrl = `https://www.facebook.com/ads/library/?id=${ad.id}`;
+  const transcriptHtml = ad.transcriptSummary
+    ? `<div class="ad-transcript"><strong>📝 Transcript:</strong> ${(ad.transcriptSummary||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`
+    : '';
+  return `<a class="ad-card" href="${adUrl}" target="_blank" rel="noopener" style="${deactStyle}">
     <div class="ad-card-header">
       <div class="ad-card-pills">
         <span class="cat-pill" style="background:${color}">${ad.creativeCategory}</span>
@@ -353,7 +364,8 @@ function adCard(ad, data, deact = false) {
       ${ad.variations > 1 ? `<span>🔀 <strong>${ad.variations} variants</strong></span>` : ''}
       <span>🎯 ${ad.mainGoal||''}</span>
     </div>
-  </div>`;
+    ${transcriptHtml}
+  </a>`;
 }
 
 // ── Charts ─────────────────────────────────────────
