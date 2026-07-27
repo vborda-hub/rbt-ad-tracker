@@ -1,0 +1,378 @@
+{
+  "ads": [
+    {
+      "id": "941486271770728",
+      "started": "Mar 2, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Product Launch",
+      "creative": "Slab pack launch announcement with first-pack promo code",
+      "mainGoal": "Product Announcement",
+      "daysActive": 147
+    },
+    {
+      "id": "27539692285660369",
+      "started": "Jun 16, 2026",
+      "variations": 1,
+      "copy": "Use code \"SLABPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "1:02",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Long-form video showcasing slab pack opening experience",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 41
+    },
+    {
+      "id": "1453550106282793",
+      "started": "Feb 17, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Product Launch",
+      "creative": "Launch announcement image — Slab Packs debut on Arena Club",
+      "mainGoal": "Product Announcement",
+      "daysActive": 160
+    },
+    {
+      "id": "2373445426414017",
+      "started": "Feb 17, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Product Launch",
+      "creative": "Launch announcement image with first-pack discount offer",
+      "mainGoal": "Product Announcement",
+      "daysActive": 160
+    },
+    {
+      "id": "3002750823254105",
+      "started": "Jun 9, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "First-pack discount image ad targeting new buyers",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 48
+    },
+    {
+      "id": "1520778399780538",
+      "started": "Jun 25, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "0:14",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Short video with pack experience + first-pack promo",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 32
+    },
+    {
+      "id": "2147633796091484",
+      "started": "Jun 16, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Video",
+      "duration": "0:30",
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Mid-length video pushing first-pack promo code offer",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 41
+    },
+    {
+      "id": "27236366072672838",
+      "started": "Jun 29, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Video",
+      "duration": "0:50",
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Video ad focused on 20% first-pack discount",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 28
+    },
+    {
+      "id": "3502248689934117",
+      "started": "Jun 29, 2026",
+      "variations": 1,
+      "copy": "Use code \"SLABPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "1:03",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Long-form video — graded card ripping experience with slab pack promo",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 28
+    },
+    {
+      "id": "2216036419149139",
+      "started": "Jun 12, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Image ad with 25% first-pack discount code",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 45
+    },
+    {
+      "id": "1061756416416569",
+      "started": "Jul 8, 2026",
+      "variations": 1,
+      "copy": "Use code \"SLABPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "0:49",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Video showcasing graded card slab packs with slab pack promo code",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 19
+    },
+    {
+      "id": "995807736495614",
+      "started": "Jul 17, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Multi-platform image with \"Slab Packs Live\" branding + experience tagline",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 10
+    },
+    {
+      "id": "1041197441604474",
+      "started": "Jul 17, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Image ad with 25% first-pack discount push",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 10
+    },
+    {
+      "id": "1350263836640712",
+      "started": "Jul 17, 2026",
+      "variations": 2,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Shared creative — 25% first-pack promo (2 ad versions)",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 10
+    },
+    {
+      "id": "1480584580535700",
+      "started": "Jul 18, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Multi-platform \"Slab Packs Live\" image with experience tagline",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 9
+    },
+    {
+      "id": "1695580598384811",
+      "started": "Jul 20, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Image ad — 25% first-pack discount, July push",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 7
+    },
+    {
+      "id": "1044794741562359",
+      "started": "Jul 9, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "0:10",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Short 10-sec video clip — pack ripping experience with promo",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 18
+    },
+    {
+      "id": "888529984296382",
+      "started": "Jul 9, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "0:10",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Short 10-sec video clip — pack ripping experience variant",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 18
+    },
+    {
+      "id": "1366675168975576",
+      "started": "Jul 15, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Image with \"Rip Real, Graded Cards\" experience messaging",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 12
+    },
+    {
+      "id": "1756363419109683",
+      "started": "May 28, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Video",
+      "duration": "0:13",
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Short video — \"Slab Packs Live at Arena Club\" with experience messaging",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 60
+    },
+    {
+      "id": "2761211980923084",
+      "started": "Jul 10, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Video",
+      "duration": "0:20",
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Short video pushing first-pack 20% discount code",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 17
+    },
+    {
+      "id": "2439006279955888",
+      "started": "Jul 20, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK25\" for 25% off your first Misc. Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club!",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Acquisition CTA",
+      "creative": "Image ad — 25% first-pack promo, July push",
+      "mainGoal": "New Customer Acquisition",
+      "daysActive": 7
+    },
+    {
+      "id": "2081706849047953",
+      "started": "Jul 15, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Image with experience tagline — Slab Packs Are Here",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 12
+    },
+    {
+      "id": "1551528026644901",
+      "started": "Jul 15, 2026",
+      "variations": 1,
+      "copy": "Use code \"FIRSTPACK20\" for 20% off your first Slab Pack! Buy | Sell | Trade | Rip. All live at Arena Club! Rip Real, Graded Cards.",
+      "mediaType": "Image",
+      "duration": null,
+      "creativeCategory": "Brand / Pack Experience",
+      "creative": "Image variant with experience tagline — Slab Packs Are Here",
+      "mainGoal": "Pack Purchase",
+      "daysActive": 12
+    }
+  ],
+  "deactivated": [],
+  "catColors": {
+    "Acquisition CTA": "#3B82F6",
+    "Brand / Pack Experience": "#8B5CF6",
+    "Product Launch": "#F59E0B",
+    "Referral / Incentive": "#10B981",
+    "Celebrity Endorsement": "#EC4899",
+    "App Store Preview": "#06B6D4",
+    "High-Value Card Showcase": "#F97316",
+    "App Download / UGC": "#84CC16",
+    "TCG Category Expansion": "#EF4444",
+    "Investment Angle": "#6366F1",
+    "Other": "#6B7280"
+  },
+  "goalColors": {
+    "New Customer Acquisition": "#3B82F6",
+    "Pack Purchase": "#8B5CF6",
+    "Product Announcement": "#F59E0B",
+    "App Download": "#06B6D4",
+    "Brand Awareness": "#EC4899",
+    "Engagement": "#10B981"
+  },
+  "scraped": "July 27, 2026",
+  "chart": {
+    "labels": [
+      "Feb 2026",
+      "Mar 2026",
+      "Apr 2026",
+      "May 2026",
+      "Jun 2026",
+      "Jul 2026"
+    ],
+    "datasets": [
+      {
+        "label": "Product Launch",
+        "data": [
+          2,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "backgroundColor": "#F59E0B"
+      },
+      {
+        "label": "Acquisition CTA",
+        "data": [
+          0,
+          0,
+          0,
+          0,
+          4,
+          5
+        ],
+        "backgroundColor": "#3B82F6"
+      },
+      {
+        "label": "Brand / Pack Experience",
+        "data": [
+          0,
+          0,
+          0,
+          1,
+          3,
+          8
+        ],
+        "backgroundColor": "#8B5CF6"
+      }
+    ],
+    "cumulativeDatasets": [
+      {
+        "label": "Total Active Ads",
+        "data": [
+          2,
+          3,
+          3,
+          4,
+          11,
+          24
+        ],
+        "borderColor": "#3B82F6",
+        "backgroundColor": "rgba(59,130,246,0.1)"
+      }
+    ]
+  }
+}
